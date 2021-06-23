@@ -68,8 +68,9 @@ BOARD_USES_RECOVERY_AS_BOOT := false
 # A/B UPDATER
 AB_OTA_UPDATER := true
 
-# Overlay
-DEVICE_PACKAGE_OVERLAYS += device/motorola/def/overlay/device
+# Overlays
+DEVICE_PACKAGE_OVERLAYS += \
+    $(LOCAL_PATH)/overlay
 
 # Inherit some common LineageOS stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)

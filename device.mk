@@ -103,7 +103,7 @@ PRODUCT_PACKAGES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    SnapdragonCamera2
+    Snap
 
 # ANT+
 #PRODUCT_PACKAGES += \
