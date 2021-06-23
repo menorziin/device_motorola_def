@@ -75,7 +75,7 @@ PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
 
 PRODUCT_PACKAGES += \
-    omni_charger_res_images \
+    charger_res_images \
     animation.txt \
     font_charger.png
 
@@ -128,11 +128,9 @@ PRODUCT_PACKAGES += \
     libandroid_net
 
 PRODUCT_PACKAGES += \
-    MotoActions
-
-PRODUCT_PACKAGES += \
     vndk_package
 
+# HIDL
 PRODUCT_PACKAGES += \
     android.hidl.base@1.0
 
@@ -142,7 +140,7 @@ PRODUCT_PACKAGES += \
     libqdMetaData.system \
     libqdMetaData
 
-#Nfc
+# Nfc
 PRODUCT_PACKAGES += \
     android.hardware.nfc@1.0 \
     android.hardware.nfc@1.1 \
@@ -156,6 +154,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libtinyalsa
 
+# Telephony-ext
+PRODUCT_PACKAGES += telephony-ext
+PRODUCT_BOOT_JARS += telephony-ext
 
 # TODO(b/78308559): includes vr_hwc into GSI before vr_hwc move to vendor
 PRODUCT_PACKAGES += \
@@ -168,7 +169,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     vendor.qti.hardware.wifi@1.0
-#    android.hardware.vibrator@1.2-service.oneplus7pro
+
 
 # Remove unwanted packages
 PRODUCT_PACKAGES += \

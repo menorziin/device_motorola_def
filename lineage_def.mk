@@ -19,16 +19,13 @@
 # product configuration (apps).
 #
 
-VENDOR_EXCEPTION_PATHS := omni \
+VENDOR_EXCEPTION_PATHS := lineage \
     motorola \
     gapps
 
 # Sample: This is where we'd set a backup provider if we had one
 # $(call inherit-product, device/sample/products/backup_overlay.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-
-# Get the prebuilt list of APNs
-$(call inherit-product, vendor/omni/config/gsm.mk)
 
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
@@ -68,15 +65,14 @@ TARGET_NO_RECOVERY := false
 BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE := false
 BOARD_USES_RECOVERY_AS_BOOT := false
 
-# must be before including omni part
-TARGET_BOOTANIMATION_SIZE := 1080p
+# A/B UPDATER
 AB_OTA_UPDATER := true
 
+# Overlay
 DEVICE_PACKAGE_OVERLAYS += device/motorola/def/overlay/device
-DEVICE_PACKAGE_OVERLAYS += vendor/omni/overlay/CarrierConfig
 
-# Inherit from our custom product configuration
-$(call inherit-product, vendor/omni/config/common.mk)
+# Inherit some common LineageOS stuff.
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 # get the rest of aosp stuff after ours
 $(call inherit-product, $(SRC_TARGET_DIR)/product/mainline_system_arm64.mk)
@@ -87,7 +83,7 @@ $(call inherit-product, device/motorola/def/device.mk)
 PRODUCT_SHIPPING_API_LEVEL := 29
 
 # Discard inherited values and use our own instead.
-PRODUCT_NAME := omni_def
+PRODUCT_NAME := lineage_def
 PRODUCT_DEVICE := def
 PRODUCT_BRAND := motorola
 PRODUCT_MANUFACTURER := motorola
@@ -96,10 +92,10 @@ PRODUCT_MODEL := motorola one hyper
 TARGET_DEVICE := MotoOneHyper
 PRODUCT_SYSTEM_NAME := MotoOneHyper
 
-VENDOR_RELEASE := 10/QPF30.103-21-1/3932d:user/release-keys
-BUILD_FINGERPRINT := motorola/def_retail/def:$(VENDOR_RELEASE)
-OMNI_BUILD_FINGERPRINT := motorola/def_retail/def:$(VENDOR_RELEASE)
-OMNI_PRIVATE_BUILD_DESC := "'def_retail-user 10 QPF30.103-21-1 3932d release-keys'"
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PRIVATE_BUILD_DISC="def_retail-user 10 QPF30.103-21-1 3932d release-keys"
+
+BUILD_FINGERPRINT := "google/redfin/redfin:11/RQ3A.210605.005/7349499:user/release-keys"
 
 PLATFORM_SECURITY_PATCH_OVERRIDE := 2019-10-05
 
@@ -107,4 +103,8 @@ TARGET_VENDOR := motorola
 
 $(call inherit-product, vendor/motorola/def/def-vendor.mk)
 
-$(call inherit-product, vendor/gapps/config.mk)
+# Gapps
+TARGET_GAPPS_ARCH := arm64
+
+# BootAnimation
+TARGET_BOOT_ANIMATION_RES := 1080
